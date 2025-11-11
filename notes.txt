@@ -1,0 +1,22 @@
+# Construir e iniciar los contenedores
+docker-compose up -d
+
+# Ver los logs (opcional)
+docker-compose logs -f
+
+# Verificar que está corriendo
+docker ps
+```
+
+---
+
+### **Paso 7: Probar tu API**
+
+Abre tu navegador o Postman y prueba:
+```
+http://localhost:3000/api/health
+```
+
+O desde tu frontend Angular:
+```
+http://localhost:3000/Software_FullControl/FullControl_System/public/api/Productos
