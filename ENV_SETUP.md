@@ -8,7 +8,7 @@ PORT=3000
 NODE_ENV=development
 
 # MySQL Database Configuration
-DB_HOST=192.168.1.24
+DB_HOST=192.168.1.22
 DB_USER=root
 DB_PASSWORD=
 DB_NAME=fullcontrol
@@ -19,7 +19,7 @@ UPLOAD_DIR=./uploads
 MAX_FILE_SIZE=5242880
 
 # Server URL
-SERVER_URL=http://192.168.1.24:3000
+SERVER_URL=http://192.168.1.22:3000
 ```
 
 ## Instrucciones:

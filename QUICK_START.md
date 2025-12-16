@@ -13,12 +13,12 @@ Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 ```env
 PORT=3000
 NODE_ENV=development
-DB_HOST=192.168.1.24
+DB_HOST=192.168.1.22
 DB_USER=root
 DB_PASSWORD=
 DB_NAME=fullcontrol
 DB_PORT=3306
-SERVER_URL=http://192.168.1.24:3000
+SERVER_URL=http://192.168.1.22:3000
 ```
 
 **Importante:** Ajusta los valores según tu configuración de MySQL.
@@ -44,7 +44,7 @@ npm start
 ### 5. Verificar que la API esté funcionando
 Abre tu navegador o usa curl:
 ```bash
-curl http://192.168.1.24:3000/api/health
+curl http://192.168.1.22:3000/api/health
 ```
 
 Deberías recibir una respuesta:
@@ -61,11 +61,11 @@ Para que el frontend se conecte a esta API, necesitas actualizar la configuraci�
 
 1. Edita el archivo `FullControl-front/src/app/assets/config.ts`:
 ```typescript
-export const IP = '192.168.1.24:3000';
+export const IP = '192.168.1.22:3000';
 ```
 
 2. **Importante:** Los servicios del frontend esperan que la API esté en:
-   - `http://192.168.1.24:3000/api/...`
+   - `http://192.168.1.22:3000/api/...`
 
    Pero el frontend actualmente usa:
    - `http://${IP}/Software_FullControl/FullControl_System/public/api/...`
@@ -73,7 +73,7 @@ export const IP = '192.168.1.24:3000';
    **Tienes dos opciones:**
 
    **Opción A:** Modificar el frontend para que use la nueva API (recomendado)
-   - Actualiza las URLs en los servicios para que apunten a `http://192.168.1.24:3000/api/...`
+   - Actualiza las URLs en los servicios para que apunten a `http://192.168.1.22:3000/api/...`
 
    **Opción B:** Configurar un proxy o modificar las rutas de la API para que coincidan con las del frontend
 
