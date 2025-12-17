@@ -30,9 +30,12 @@ class Material {
       imagePath
     } = material;
 
+    // Formatear fecha si existe
+    const formattedDate = lastIncome ? new Date(lastIncome).toISOString().slice(0, 10) : null;
+
     const [result] = await db.query(
       'INSERT INTO materials (name, existence, price, supplier, buyLink, lastIncome, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [name, existence, price, supplier, buyLink || null, lastIncome, imagePath || null]
+      [name, existence, price, supplier, buyLink || null, formattedDate, imagePath || null]
     );
 
     return this.getById(result.insertId);
@@ -49,9 +52,12 @@ class Material {
       imagePath
     } = material;
 
+    // Formatear fecha si existe
+    const formattedDate = lastIncome ? new Date(lastIncome).toISOString().slice(0, 10) : null;
+
     await db.query(
       'UPDATE materials SET name = ?, existence = ?, price = ?, supplier = ?, buyLink = ?, lastIncome = ?, imagePath = ? WHERE id = ?',
-      [name, existence, price, supplier, buyLink || null, lastIncome, imagePath || null, id]
+      [name, existence, price, supplier, buyLink || null, formattedDate, imagePath || null, id]
     );
 
     return this.getById(id);

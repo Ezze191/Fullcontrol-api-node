@@ -83,7 +83,7 @@ class ServiceController {
       }
 
       // Generate image path
-      const serverUrl = process.env.SERVER_URL || 'http://192.168.1.24:3000';
+      const serverUrl = `${req.protocol}://${req.get('host')}`;
       const imagePath = `${serverUrl}/uploads/${req.file.filename}`;
 
       res.json({ ruta: imagePath });
