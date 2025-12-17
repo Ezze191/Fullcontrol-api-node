@@ -76,9 +76,15 @@ class ProductoTemporada {
             GANANCIA = PRECIO_VENTA - PRECIO_COMPRA;
         }
 
+        // Format date if present
+        let formattedDate = ULTIMO_INGRESO;
+        if (ULTIMO_INGRESO && typeof ULTIMO_INGRESO === 'string' && ULTIMO_INGRESO.includes('T')) {
+            formattedDate = ULTIMO_INGRESO.split('T')[0];
+        }
+
         await db.query(
             'UPDATE productos_temporada SET TEMPORADA = ?, PLU = ?, NOMBRE = ?, EXISTENCIA = ?, PRECIO_COMPRA = ?, PRECIO_VENTA = ?, GANANCIA = ?, PROVEDOR = ?, ULTIMO_INGRESO = ?, IMAGE_PATH = ? WHERE ID_PRODUCT = ?',
-            [TEMPORADA, PLU, NOMBRE, EXISTENCIA, PRECIO_COMPRA, PRECIO_VENTA, GANANCIA, PROVEDOR, ULTIMO_INGRESO, IMAGE_PATH, id]
+            [TEMPORADA, PLU, NOMBRE, EXISTENCIA, PRECIO_COMPRA, PRECIO_VENTA, GANANCIA, PROVEDOR, formattedDate, IMAGE_PATH, id]
         );
 
         return this.getById(id);

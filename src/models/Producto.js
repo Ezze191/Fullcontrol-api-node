@@ -58,9 +58,16 @@ class Producto {
     } = producto;
 
     // GANANCIA is calculated by trigger in database
+
+    // Format date if present
+    let formattedDate = ULTIMO_INGRESO;
+    if (ULTIMO_INGRESO && typeof ULTIMO_INGRESO === 'string' && ULTIMO_INGRESO.includes('T')) {
+      formattedDate = ULTIMO_INGRESO.split('T')[0];
+    }
+
     await db.query(
       'UPDATE productos SET PLU = ?, NOMBRE = ?, EXISTENCIA = ?, PRECIO_COMPRA = ?, PRECIO_VENTA = ?, PROVEDOR = ?, ULTIMO_INGRESO = ?, IMAGE_PATH = ? WHERE ID_PRODUCT = ?',
-      [PLU, NOMBRE, EXISTENCIA, PRECIO_COMPRA, PRECIO_VENTA, PROVEDOR, ULTIMO_INGRESO, IMAGE_PATH, id]
+      [PLU, NOMBRE, EXISTENCIA, PRECIO_COMPRA, PRECIO_VENTA, PROVEDOR, formattedDate, IMAGE_PATH, id]
     );
 
     return this.getById(id);

@@ -10,6 +10,8 @@ const orderRoutes = require('./src/routes/orderRoutes');
 const productoRoutes = require('./src/routes/productoRoutes');
 const serviceRoutes = require('./src/routes/serviceRoutes');
 const ventaRoutes = require('./src/routes/ventaRoutes');
+const productoTemporadaRoutes = require('./src/routes/productoTemporadaRoutes');
+const ofertaRoutes = require('./src/routes/ofertaRoutes');
 
 // Import error handler
 const errorHandler = require('./src/middleware/errorHandler');
@@ -35,9 +37,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/materials', materialRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', productoRoutes);
-app.use('/api', require('./src/routes/productoTemporadaRoutes'));
 app.use('/api/services', serviceRoutes);
 app.use('/api', ventaRoutes);
+app.use('/api', productoTemporadaRoutes);
+app.use('/api', ofertaRoutes);
 
 // Routes - Compatible with frontend URLs (if using proxy or direct connection)
 // These routes match the frontend's expected URL structure
@@ -46,28 +49,21 @@ app.use('/api', ventaRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api/materials', materialRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api/orders', orderRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api', productoRoutes);
-app.use('/Software_FullControl/FullControl_System/public/api', require('./src/routes/productoTemporadaRoutes'));
 app.use('/Software_FullControl/FullControl_System/public/api/services', serviceRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api', ventaRoutes);
+app.use('/Software_FullControl/FullControl_System/public/api', productoTemporadaRoutes);
+app.use('/Software_FullControl/FullControl_System/public/api', ofertaRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'API is running' });
+  res.json({ status: 'ok', timestamp: new Date(), uptime: process.uptime() });
 });
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint no encontrado' });
-});
-
-// Error handler
+// Error handling middleware
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Access locally: http://localhost:${PORT}`);
 });
-
-module.exports = app;
-
