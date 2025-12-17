@@ -35,6 +35,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/materials', materialRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', productoRoutes);
+app.use('/api', require('./src/routes/productoTemporadaRoutes'));
 app.use('/api/services', serviceRoutes);
 app.use('/api', ventaRoutes);
 
@@ -45,6 +46,7 @@ app.use('/api', ventaRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api/materials', materialRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api/orders', orderRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api', productoRoutes);
+app.use('/Software_FullControl/FullControl_System/public/api', require('./src/routes/productoTemporadaRoutes'));
 app.use('/Software_FullControl/FullControl_System/public/api/services', serviceRoutes);
 app.use('/Software_FullControl/FullControl_System/public/api', ventaRoutes);
 
