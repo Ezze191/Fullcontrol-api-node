@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const productoController = require('../controllers/productoController');
+const barcodeController = require('../controllers/barcodeController');
+const inventoryController = require('../controllers/inventoryController');
 const upload = require('../middleware/upload');
 
 // Get all productos
@@ -23,8 +25,19 @@ router.delete('/eliminar/:id', productoController.delete);
 
 // Upload image
 router.post('/Producto/ActualizarIMG', upload.single('imagen'), productoController.uploadImage);
+
 // Cobrar producto
 router.post('/cobrar/:id/:unidades', productoController.cobrar);
 
+// Generate barcode PDF
+router.get('/barcode/:id', barcodeController.generateBarcodePDF);
+
+// Inventory management
+router.post('/inventory/add/:id', inventoryController.addStock);
+router.post('/inventory/remove/:id', inventoryController.removeStock);
+router.get('/inventory/summary', inventoryController.getInventorySummary);
+
 module.exports = router;
+
+
 
