@@ -19,9 +19,9 @@ services:
     volumes:
       # Persistir uploads fuera del contenedor
       - ./uploads:/app/uploads
-      # Para desarrollo: descomentar para hot-reload
-      # - .:/app
-      # - /app/node_modules
+      # Para desarrollo: hot-reload habilitado
+      - .:/app
+      - /app/node_modules
     restart: unless-stopped
     networks:
       - fullcontrol-network
